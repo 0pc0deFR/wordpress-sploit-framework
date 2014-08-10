@@ -1,9 +1,10 @@
 import ConfigParser
+from plugins_loader import *
 
 
 class BaseConfiguration:
 	"""
-	Permet de lire la section [Base] du fichier de configuration
+	Permet de lire la section [Base] du fichier de configuration de l'exploit
 	"""
 	def __init__(self, file_configuration, printing):
 		"""
@@ -74,6 +75,9 @@ class BaseConfiguration:
 
 
 class ExploitationConfiguration:
+	"""
+	Permet de lire la section [Exploitation] et [Parameters] du fichier de configuration de l'exploit
+	"""
 	def __init__(self, file_configuration):
 		self.config = ConfigParser.ConfigParser()
 		self.config.readfp(open(file_configuration))
@@ -102,10 +106,11 @@ class PayloadConfiguration:
 	"""
 	Charge le payload
 	"""
-	def __init__(self, file_payload, printing):
+	def __init__(self, file_payload, printing, list_plugins):
 		"""
 		Creer une instance de ConfigParser et charge toutes les informations de la section [Payload]
 		"""
+		self.list_plugins = list_plugins
 		self.config = ConfigParser.ConfigParser()
 		self.config.readfp(open(file_payload))
 		self.read_title()

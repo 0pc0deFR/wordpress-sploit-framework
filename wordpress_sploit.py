@@ -16,4 +16,4 @@ parser.add_argument('S', action=uri, nargs=1, help='Definir le serveur cible')
 parser.add_argument('-P', action=version, nargs=1, help='Load your plugin')
 args = parser.parse_args()
 """
-ExploitConfiguration('C:/Users/0pc0deFR/Desktop/Wordpress Sploit/exploits/WordPress_bib2html_0_9_3_Cross_Site_Scripting', 'C:/Users/0pc0deFR/Desktop/Wordpress Sploit/payloads/alert', 'http://serveur/')
+ExploitConfiguration('./exploits/WordPress_bib2html_0_9_3_Cross_Site_Scripting', './payloads/alert', 'http://serveur/wordpress-development/')
