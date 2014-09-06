@@ -10,7 +10,7 @@ class BaseConfiguration:
 		"""
 		Creer une instance de ConfigParser et charge toutes les informations de la section [Base]
 		"""
-		self.config = ConfigParser.ConfigParser()
+		self.config = ConfigParser.SafeConfigParser()
 		self.config.readfp(open(file_configuration))
 		self.read_title()
 		self.read_description()
@@ -79,7 +79,7 @@ class ExploitationConfiguration:
 	Permet de lire la section [Exploitation] et [Parameters] du fichier de configuration de l'exploit
 	"""
 	def __init__(self, file_configuration):
-		self.config = ConfigParser.ConfigParser()
+		self.config = ConfigParser.SafeConfigParser()
 		self.config.readfp(open(file_configuration))
 		self.read_method()
 		self.read_url()
@@ -111,11 +111,12 @@ class PayloadConfiguration:
 		Creer une instance de ConfigParser et charge toutes les informations de la section [Payload]
 		"""
 		self.list_plugins = list_plugins
-		self.config = ConfigParser.ConfigParser()
+		self.config = ConfigParser.SafeConfigParser()
 		self.config.readfp(open(file_payload))
 		self.read_title()
 		self.read_description()
 		self.read_payload()
+		self.read_type()
 		if(printing == True):
 			self.print_payload_configuration()
 
@@ -140,7 +141,15 @@ class PayloadConfiguration:
 		self.payload = self.config.get('Payload', 'payload')
 		return self.payload
 
+	def read_type(self):
+		"""
+		Recupere le type
+		"""
+		self.type = self.config.get('Payload', 'type')
+		return self.type	
+
 	def print_payload_configuration(self):
 		print '\nPayload:'
 		print '	Title:', self.title
 		print '	Description:', self.description
+		print '	Type:', self.type
