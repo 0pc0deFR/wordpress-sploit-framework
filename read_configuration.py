@@ -17,6 +17,8 @@ class BaseConfiguration:
 		self.read_author()
 		self.read_date()
 		self.read_type()
+		self.read_CVE()
+		self.read_EDB()
 		if(printing == True):
 			self.print_base_configuration()
 
@@ -62,6 +64,26 @@ class BaseConfiguration:
 		self.type = self.config.get('Base', 'type')
 		return self.type
 
+	def read_CVE(self):
+		"""
+		Recupere le CVE s'il existe
+		"""
+		try:
+			self.cve = self.config.get('Identifiers', 'CVE')
+		except:
+			self.cve = 'Not defined!'
+		return self.cve
+
+	def read_EDB(self):
+		"""
+		Recupere le EDB s'il existe
+		"""
+		try:
+			self.edb = self.config.get('Identifiers', 'EDB')
+		except:
+			self.edb = 'Not defined!'
+		return self.edb
+
 	def print_base_configuration(self):
 		print '\nExploit Configuration:'
 		print "	Title:", self.title
@@ -70,6 +92,8 @@ class BaseConfiguration:
 		print "	Author:", self.author
 		print "	Date:", self.date
 		print "	Exploit type:", self.type
+		print "	CVE ID:", self.cve
+		print "	EDB ID:", self.edb
 
 
 
