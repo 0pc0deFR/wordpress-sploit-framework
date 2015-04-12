@@ -1,6 +1,5 @@
-import ConfigParser
 from plugins_loader import *
-
+import ConfigParser
 
 class BaseConfiguration:
 	"""
@@ -117,6 +116,7 @@ class PayloadConfiguration:
 		self.read_description()
 		self.read_payload()
 		self.read_type()
+		self.read_method()
 		if(printing == True):
 			self.print_payload_configuration()
 
@@ -146,7 +146,15 @@ class PayloadConfiguration:
 		Recupere le type
 		"""
 		self.type = self.config.get('Payload', 'type')
-		return self.type	
+		return self.type
+
+	def read_method(self):
+		"""
+		Recupere la method
+		"""
+		if self.type.lower() == "csrf":
+			self.method = self.config.get('Payload', 'method')
+			return self.method
 
 	def print_payload_configuration(self):
 		print '\nPayload:'

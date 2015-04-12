@@ -26,6 +26,7 @@ class Loader:
 
 	def LoadArg(self, arg):
 		if(arg == "-p"):
+			#List payloads
 			self.PrintListPayloads()
 		elif(arg == "-e"):
 			self.PrintListExploits()

@@ -1,0 +1,6 @@
+[Payload]
+type = csrf
+method = get
+title = IMG HTML Balise
+description: The IMG HTML balise display execute a GET request.
+payload = <img src="[EXPLOIT]" />
