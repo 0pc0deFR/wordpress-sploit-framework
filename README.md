@@ -9,7 +9,7 @@ Wordpress Sploit Framework includes a web server for the operation of CSRF vulne
 Wordpress Sploit Framework operates of CSRF, XSS and SQL vulnerabilities.
 
 ##How to use
-Wordpress Sploit Framework is used with simple configuration files.
-In the exploits directory is stored the configuration files for exploits.
-In the payloads directory is stored the configuration files for payloads.
-In the plugins directory is stored the plugins files.
+Wordpress Sploit Framework is used with simple configuration files.  
+In the exploits directory is stored the configuration files for exploits.  
+In the payloads directory is stored the configuration files for payloads.  
+In the plugins directory is stored the plugins files.  
