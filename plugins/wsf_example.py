@@ -9,3 +9,6 @@ def author():
 
 def payload(payload, method, type_exploit):
 	return payload
+
+def parameters(parameters, method, type_exploit):
+	return parameters
