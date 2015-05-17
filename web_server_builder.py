@@ -26,6 +26,7 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 			result = "<form id='payload' action='"+global_url+"' method='post'>"
 			for key, value in global_parameters.items():
 				result += "<input type='hidden' name='"+key+"' value='"+value+"'>"
+			result += "</form>"
 			return result
 
 	def index(self):
