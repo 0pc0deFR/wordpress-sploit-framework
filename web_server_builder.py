@@ -35,7 +35,7 @@ class HTTPHandler (SimpleHTTPRequestHandler):
 		if global_method.lower() == "get":
 			html_response = '<html><head></head><body>'+self.prepare_request('')+'</body></html>'
 		else:
-			csrf_name = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(16))
+			csrf_name = ''.join(random.choice('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(36))
 			html_response = '<html><head></head><body onload="document.getElementById(\''+csrf_name+'\').submit()">'+self.prepare_request(csrf_name)+'</body></html>'
 		self.send_response(200)
 		self.send_header("Content-type", "text/html")
