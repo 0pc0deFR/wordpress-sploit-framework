@@ -45,8 +45,9 @@ class PluginLoader:
 					self.except_error = ''
 		return self.parameters
 
-	def load_func_exploit(self, url, method, type_exploit):
+	def load_func_exploit(self, url, parameters, method, type_exploit):
 		self.url = url
+		self.parameters = parameters
 		self.method = method
 		self.type_exploit = type_exploit
 		self.exploit = True
@@ -54,7 +55,7 @@ class PluginLoader:
 			if plugin.find('.pyc') == -1:
 				self.import_plugin = imp.load_source(plugin[:len(plugin)-3], './plugins/%s' % plugin)
 				try:
-					self.exploit = self.import_plugin.exploit(self.url, self.method, self.type_exploit)
+					self.exploit = self.import_plugin.exploit(self.url, self.parameters, self.method, self.type_exploit)
 				except:
 					self.except_error = ''
 		return self.exploit
