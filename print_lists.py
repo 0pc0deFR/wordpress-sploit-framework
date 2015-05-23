@@ -16,6 +16,10 @@ class PrintLists:
 			PayloadConfiguration('./payloads/'+payload, True, '')
 			print "	Filename: %s" %payload
 
-	def PrintListPlugins(self):
-		plugins = listdir('./plugins/')
-		PluginLoader(plugins, True)
+	def PrintListPluginsAvailable(self):
+		plugins = listdir('./plugins-available/')
+		PluginLoader(plugins, "available", True)
+
+	def PrintListPluginsEnabled(self):
+		plugins = listdir('./plugins-enabled/')
+		PluginLoader(plugins, "enabled", True)

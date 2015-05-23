@@ -1,6 +1,7 @@
 from exploit_configuration import *
 from print_lists import *
 from sys import *
+from os import *
 
 class Loader:
 	def __init__(self, argv):
@@ -31,9 +32,16 @@ class Loader:
 		elif(arg == "-e"):
 			self.PrintListExploits()
 			#List exploits
-		elif(arg == "-P"):
-			self.PrintListPlugins()
-			#List plugins
+		elif(arg == "-Pe"):
+			self.PrintListPluginsEnabled()
+			#List plugins enabled
+		elif(arg == "-Pa"):
+			self.PrintListPluginsAvailable()
+			#List plugins available
+		elif(arg == '-Pen'):
+			self.PluginEnable(argv[2])
+		elif(arg == '-Pdis'):
+			self.PluginDisable(argv[2])
 		elif(arg == "-h"):
 			self.PrintHelp()
 		else:
@@ -45,7 +53,10 @@ class Loader:
 		print "Help:"
 		print "-p: List payloads"
 		print "-e: List exploits"
-		print "-P: List plugins"
+		print "-Pe: List plugins enabled"
+		print "-Pa: List plugins available"
+		print "-Pen [PLUGIN]: Enable the plugin"
+		print "-Pdis [PLUGIN]: Disable the plugin"
 		print "-h: Print this help"
 
 	def PrintListPayloads(self):
@@ -56,8 +67,24 @@ class Loader:
 		print_list_exploits =  PrintLists()
 		print_list_exploits.PrintListExploits()
 
-	def PrintListPlugins(self):
+	def PrintListPluginsEnabled(self):
 		print_list_plugins = PrintLists()
-		print_list_plugins.PrintListPlugins()
+		print_list_plugins.PrintListPluginsEnabled()
+
+	def PrintListPluginsAvailable(self):
+		print_list_plugins = PrintLists()
+		print_list_plugins.PrintListPluginsAvailable()
+
+	def PluginEnable(self, plugin):
+		if(path.isfile('./plugins-available/' + plugin)):
+			system('ln -s ../plugins-available/' + plugin + ' ./plugins-enabled/' + plugin)
+		else:
+			print('No file exist!')
+
+	def PluginDisable(self, plugin):
+		if(path.isfile('./plugins-enabled/' + plugin)):
+			system('rm -r ./plugins-enabled/' + plugin)
+		else:
+			print('No file exist!')
 
 Loader(argv)
