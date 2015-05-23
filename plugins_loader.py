@@ -25,7 +25,7 @@ class PluginLoader:
 		self.type_exploit = type_exploit
 		for plugin in self.list_plugin:
 			if plugin.find('.pyc') == -1:
-				self.import_plugin = imp.load_source(plugin[len(plugin)-3], './plugins/%s' % plugin)
+				self.import_plugin = imp.load_source(plugin[:len(plugin)-3], './plugins/%s' % plugin)
 				try:
 					self.payload = self.import_plugin.payload(self.payload, self.method, self.type_exploit)
 				except:
@@ -38,7 +38,7 @@ class PluginLoader:
 		self.type_exploit = type_exploit
 		for plugin in self.list_plugin:
 			if plugin.find('.pyc') == -1:
-				self.import_plugin = imp.load_source(plugin[len(plugin)-3], './plugins/%s' % plugin)
+				self.import_plugin = imp.load_source(plugin[:len(plugin)-3], './plugins/%s' % plugin)
 				try:
 					self.parameters = self.import_plugin.parameters(self.parameters, self.method, self.type_exploit)
 				except:
@@ -49,15 +49,15 @@ class PluginLoader:
 		self.url = url
 		self.method = method
 		self.type_exploit = type_exploit
+		self.exploit = True
 		for plugin in self.list_plugin:
 			if plugin.find('.pyc') == -1:
-				self.import_plugin = imp.load_source(plugin[len(plugin)-3], './plugins/%s' % plugin)
+				self.import_plugin = imp.load_source(plugin[:len(plugin)-3], './plugins/%s' % plugin)
 				try:
 					self.exploit = self.import_plugin.exploit(self.url, self.method, self.type_exploit)
-					return self.exploit
 				except:
 					self.except_error = ''
-					return True
+		return self.exploit
 
 	def print_plugin_configuration(self):
 		for plugin in self.list_plugin:
