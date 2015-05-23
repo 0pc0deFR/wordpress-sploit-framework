@@ -12,3 +12,6 @@ def payload(payload, method, type_exploit):
 
 def parameters(parameters, method, type_exploit):
 	return parameters
+
+def exploit(url, method, type_exploit):
+	return True
