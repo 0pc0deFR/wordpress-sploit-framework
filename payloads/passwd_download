@@ -1,0 +1,5 @@
+[Payload]
+type = download
+title = Unix passwd file download
+description: The passwd file is a sensible file in Unix System and it's possible to download this file.
+payload = ../../passwd
