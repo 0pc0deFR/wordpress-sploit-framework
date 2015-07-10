@@ -31,6 +31,10 @@ def exploit(url, parameters, method, type_exploit):
 			sql_query = input('You can define SQL Query parameter for SQLMap:')
 		except:
 			sql_query = None
+		try:
+			cookie = input('You can define Cookie parameter for SQLMap:')
+		except:
+			cookie = None
 		parameters = urllib.urlencode(parameters)
 		command = SQLMAP_URI
 		if method.lower() == "get":
@@ -42,6 +46,8 @@ def exploit(url, parameters, method, type_exploit):
 			command += " --dbms=" + dbms
 		if sql_query != None:
 			command += " --sql_query=" + sql_query
+		if cookie != None:
+			command += " --cookie=" + cookie
  		os.system(command)
 		return False
 	else:
