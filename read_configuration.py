@@ -1,5 +1,6 @@
 from plugins_loader import *
 import ConfigParser
+import sys
 
 class BaseConfiguration:
 	"""
@@ -9,18 +10,22 @@ class BaseConfiguration:
 		"""
 		Creer une instance de ConfigParser et charge toutes les informations de la section [Base]
 		"""
-		self.config = ConfigParser.SafeConfigParser()
-		self.config.readfp(open(file_configuration))
-		self.read_title()
-		self.read_description()
-		self.read_version()
-		self.read_author()
-		self.read_date()
-		self.read_type()
-		self.read_CVE()
-		self.read_EDB()
-		if(printing == True):
-			self.print_base_configuration()
+		try:
+			self.config = ConfigParser.SafeConfigParser()
+			self.config.readfp(open(file_configuration))
+			self.read_title()
+			self.read_description()
+			self.read_version()
+			self.read_author()
+			self.read_date()
+			self.read_type()
+			self.read_CVE()
+			self.read_EDB()
+			if(printing == True):
+				self.print_base_configuration()
+		except:
+			print "Error in loading exploit module %s !" % file_configuration
+			sys.exit(1)
 
 	def read_title(self):
 		"""
